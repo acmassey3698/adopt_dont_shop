@@ -15,16 +15,26 @@ RSpec.describe 'Admin shelters index' do
   it "lists all the shelters" do
     visit "/admin/shelters"
 
-    expect(page).to have_content(@shelter_1.name)
-    expect(page).to have_content(@shelter_2.name)
-    expect(page).to have_content(@shelter_3.name)
-    expect(page).to have_content(@shelter_4.name)
+    within("#shelter-#{@shelter_1.id}") do
+      expect(page).to have_content(@shelter_1.name)
+    end
+    within("#shelter-#{@shelter_2.id}") do
+      expect(page).to have_content(@shelter_2.name)
+    end
+    within("#shelter-#{@shelter_3.id}") do
+      expect(page).to have_content(@shelter_3.name)
+    end
+    within("#shelter-#{@shelter_4.id}") do
+      expect(page).to have_content(@shelter_4.name)
+    end
   end
 
   it "Shows shelters with pending applications" do
     visit "/admin/shelters"
 
-    expect(page).to have_content(@shelter_1.name)
-    expect(page).to have_content(@shelter_1.city)
+    within("#Shelter-#{@shelter_1.id}") do
+      expect(page).to have_content(@shelter_1.name)
+      expect(page).to have_content(@shelter_1.city)
+    end 
   end
 end

@@ -19,8 +19,13 @@ RSpec.describe 'Admin application show page' do
   it 'has a button beside every pet to approve the application for that specific pet' do
     visit "/admin/applications/#{@application.id}"
 
-    expect(page).to have_button("Approve Adoption for #{@buddy.name}")
-    expect(page).to have_button("Approve Adoption for #{@lucille.name}")
+    within("#pet-#{@buddy.id}") do
+      expect(page).to have_button("Approve Adoption for #{@buddy.name}")
+    end
+
+    within("#pet-#{@lucille.id}") do
+      expect(page).to have_button("Approve Adoption for #{@lucille.name}")
+    end
   end
 
   it 'has approves the application when the button is clicked' do
@@ -38,8 +43,13 @@ RSpec.describe 'Admin application show page' do
   it 'has a button beside every pet to reject the application for that specific pet' do
     visit "/admin/applications/#{@application.id}"
 
-    expect(page).to have_button("Reject Adoption for #{@buddy.name}")
-    expect(page).to have_button("Reject Adoption for #{@lucille.name}")
+    within("#pet-#{@buddy.id}") do
+      expect(page).to have_button("Reject Adoption for #{@buddy.name}")
+    end
+
+    within("#pet-#{@lucille.id}") do
+      expect(page).to have_button("Reject Adoption for #{@lucille.name}")
+    end
   end
 
   it 'Rejects the application when the button is clicked' do
@@ -123,7 +133,7 @@ RSpec.describe 'Admin application show page' do
     click_button "Approve Adoption for #{@lucille.name}"
     click_button "Approve Adoption for #{@buddy.name}"
     visit "/admin/applications/#{@application_2.id}"
-    expect(page).to_not have_content("Approve Adoption for #{@lucille.name}")
+    expect(page).to_not have_button("Approve Adoption for #{@lucille.name}")
     expect(page).to have_content("#{@lucille.name} Has Already Been Approved on Another Application")
     expect(page).to have_button("Reject Adoption for #{@lucille.name}")
   end
