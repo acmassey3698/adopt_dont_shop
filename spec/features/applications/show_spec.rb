@@ -44,11 +44,9 @@ RSpec.describe "application show page" do
 
   it "has a submit section when there is more than 1 pet on the application" do
     visit "/applications/#{@application.id}"
-
     fill_in "Search for Pet by Name", with: "Lobster"
     click_button "Search"
     click_button "Adopt this Pet"
-
     fill_in "Why I would make a good owner for these pet(s)", with: "They're so cute!"
     click_button "Submit this Application"
 
