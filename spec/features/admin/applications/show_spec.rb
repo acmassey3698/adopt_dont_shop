@@ -106,5 +106,17 @@ RSpec.describe 'Admin application show page' do
     expect(page).to have_content("Application Status: Rejected")
   end
 
+  it "Makes pets not adoptable after application approval" do
+    visit "/admin/applications/#{@application.id}"
+
+    click_button "Approve Adoption for #{@lucille.name}"
+    click_button "Approve Adoption for #{@buddy.name}"
+
+    visit "/pets/#{@lucille.id}"
+    @lucille.reload
+    expect(@lucille.adoptable).to eq(false)
+    expect(page).to have_content(false)
+  end
+
 
 end
