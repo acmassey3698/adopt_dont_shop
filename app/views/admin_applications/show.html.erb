@@ -6,14 +6,20 @@
   <li><%= "Applicant City: #{@application.city}, #{@application.state}" %></li>
   <li><%= "Applicant Zip Code: #{@application.zip}" %></li>
   <li><%= "Applicant Message: #{@application.message}" %></li>
+  <li><%= "Application Status: #{@application.status}" %></li>
   <li><%= "Pets Included:" %></li>
     <ul>
       <% @application.pets.each_with_index do |pet, index|%>
         <li><%=pet.name%></li>
 
          <% if @application.application_pets[index].status == nil %>
-            <%= button_to "Approve Adoption for #{pet.name}", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, status: "Approved"} %>
-            <%= button_to "Reject Adoption for #{pet.name}", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, status: "Rejected"} %>
+            <%if pet.adoptable == true %>
+              <%= button_to "Approve Adoption for #{pet.name}", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, status: "Approved"} %><br><br>
+              <%= button_to "Reject Adoption for #{pet.name}", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, status: "Rejected"} %><br><br>
+            <%elsif pet.adoptable == false %>
+              <%= "**#{pet.name} Has Already Been Approved on Another Application**" %>
+              <%= button_to "Reject Adoption for #{pet.name}", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, status: "Rejected"} %><br><br>
+            <%end%>
             <% elsif @application.application_pets[index].status == "Approved" %>
             <%= "Application Approved" %><br><br>
             <% elsif @application.application_pets[index].status == "Rejected" %>
@@ -21,5 +27,5 @@
           <%end%>
       <%end%>
     </ul>
-  <li><%= "Application Status: #{@application.status}" %>
+
 </ul>
