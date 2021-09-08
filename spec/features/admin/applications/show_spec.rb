@@ -125,8 +125,6 @@ RSpec.describe 'Admin application show page' do
     click_button "Approve Adoption for #{@buddy.name}"
 
     visit "/admin/applications/#{@application_2.id}"
-    save_and_open_page
-
     expect(page).to_not have_content("Approve Adoption for #{@lucille.name}")
     expect(page).to have_content("#{@lucille.name} Has Already Been Approved on Another Application")
     expect(page).to have_button("Reject Adoption for #{@lucille.name}")
