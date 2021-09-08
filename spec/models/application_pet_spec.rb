@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe ApplicationPet, type: :model do
    describe "relationships" do
      it {should belong_to :application}
-    it {should belong_to :pet}
+     it {should belong_to :pet}
    end
 
    before :each do
@@ -19,9 +19,9 @@ RSpec.describe ApplicationPet, type: :model do
      @application_pet_2 = ApplicationPet.create!(application: @application, pet: @buddy, status: nil )
    end
 
-   it "#self.find_application_pet" do
-     expect(ApplicationPet.find_application_pet(@application.id, @lucille.id)).to eq(@application_pet)
-   end
-
-
+  describe 'class methods' do
+     it "#find_application_pet" do
+       expect(ApplicationPet.find_application_pet(@application.id, @lucille.id)).to eq(@application_pet)
+     end
+  end
 end

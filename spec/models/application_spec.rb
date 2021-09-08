@@ -20,16 +20,17 @@ RSpec.describe Application, type: :model do
     @application_pet = ApplicationPet.create!(application: @application, pet: @lucille, status: "Approved")
     @application_pet_2 = ApplicationPet.create!(application: @application, pet: @buddy, status: "Approved")
     @application_pet_3 = ApplicationPet.create!(application: @application_2, pet: @bozo, status: "Rejected")
-
   end
+  
+  describe 'instance methods' do
+    it "update_status!" do
+      @application.update_status!
+      expect(@application.status).to eq("Approved")
+    end
 
-  it "update_status!" do
-    @application.update_status!
-    expect(@application.status).to eq("Approved")
-  end
-
-  it "all_approved?" do
-    expect(@application.all_approved?).to eq(true)
-    expect(@application_2.all_approved?).to eq(false)
+    it "all_approved?" do
+      expect(@application.all_approved?).to eq(true)
+      expect(@application_2.all_approved?).to eq(false)
+    end
   end
 end
