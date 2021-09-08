@@ -1,13 +1,13 @@
 class ApplicationsController < ApplicationController
 
+   def new
+   end
+
    def show
      @application = Application.find(params[:application_id])
      if params[:search]
       @pets = Pet.search(params[:search])
       end
-   end
-
-   def new
    end
 
    def create
@@ -23,10 +23,8 @@ class ApplicationsController < ApplicationController
    def update
      application = Application.find(params[:id])
      application.update({message: params[:message], status: params[:status]})
-
      redirect_to "/applications/#{application.id}"
    end
-
 
 private
   def application_params
