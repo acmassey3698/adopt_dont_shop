@@ -118,5 +118,17 @@ RSpec.describe 'Admin application show page' do
     expect(page).to have_content(false)
   end
 
+  it "Removes approve/reject buttons when the pet was approved on another app" do
+    visit "/admin/applications/#{@application.id}"
 
+    click_button "Approve Adoption for #{@lucille.name}"
+    click_button "Approve Adoption for #{@buddy.name}"
+
+    visit "/admin/applications/#{@application_2.id}"
+    save_and_open_page
+
+    expect(page).to_not have_content("Approve Adoption for #{@lucille.name}")
+    expect(page).to have_content("#{@lucille.name} Has Already Been Approved on Another Application")
+    expect(page).to have_button("Reject Adoption for #{@lucille.name}")
+  end
 end
