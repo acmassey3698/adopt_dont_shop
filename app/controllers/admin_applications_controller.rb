@@ -6,7 +6,7 @@ class AdminApplicationsController < ApplicationController
   def update
     @application = Application.find(params[:application_id])
     application_pet = ApplicationPet.find_application_pet(params[:application_id], params[:pet_id])
-    application_pet.update!(admin_application_params)
+    application_pet.update(admin_application_params)
 
     @application.update_status!
 
