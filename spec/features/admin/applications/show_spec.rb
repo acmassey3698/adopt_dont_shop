@@ -90,7 +90,6 @@ RSpec.describe 'Admin application show page' do
 
   it "shows the application is approved when all pets are approved" do
     visit "/admin/applications/#{@application.id}"
-
     click_button "Approve Adoption for #{@lucille.name}"
     click_button "Approve Adoption for #{@buddy.name}"
 
@@ -123,7 +122,6 @@ RSpec.describe 'Admin application show page' do
 
     click_button "Approve Adoption for #{@lucille.name}"
     click_button "Approve Adoption for #{@buddy.name}"
-
     visit "/admin/applications/#{@application_2.id}"
     expect(page).to_not have_content("Approve Adoption for #{@lucille.name}")
     expect(page).to have_content("#{@lucille.name} Has Already Been Approved on Another Application")

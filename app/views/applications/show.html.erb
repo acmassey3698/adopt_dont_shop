@@ -2,13 +2,12 @@
 
 <%= render partial: "./shared/application_info" %>
 
-      <% @application.pets.each do |pet|%>
-        <li><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></li>
-      <%end%>
-    </ul>
-  <li><%= "Application Status: #{@application.status}" %>
-</ul>
-
+  <ul>
+  <% @application.pets.each do |pet|%>
+    <li><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></li><br><br>
+  <%end%>
+  </ul>
+  
 <% if @application.status == 'In Progress' %>
   <h3>Add a Pet to this Application</h3><br>
   <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>

@@ -3,7 +3,7 @@
   <%= render partial: "./shared/application_info" %>
 
   <% @application.pets.each_with_index do |pet, index|%>
-    <li><%=pet.name%></li>
+    <%=pet.name%><br><br>
 
      <% if @application.application_pets[index].status == nil %>
         <%if pet.adoptable == true %>
@@ -19,5 +19,3 @@
         <%= "Application Rejected" %><br><br>
       <%end%>
   <%end%>
-</ul>
-</ul>
