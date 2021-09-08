@@ -10,9 +10,10 @@ class Application < ApplicationRecord
   def update_status!
     if all_approved? == true
       update({status: "Approved"})
+      pets.update(adoptable: false)
     elsif all_approved? == false
       update({status: "Rejected"})
-    end 
+    end
   end
 
   def all_approved?
