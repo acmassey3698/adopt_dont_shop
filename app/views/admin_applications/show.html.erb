@@ -7,17 +7,17 @@
     <%=pet.name%><br><br>
 
      <% if @application.application_pets[index].status == nil %>
-        <%if pet.adoptable == true %>
-          <%= button_to "Approve Adoption for #{pet.name}", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, status: "Approved"} %><br><br>
-          <%= button_to "Reject Adoption for #{pet.name}", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, status: "Rejected"} %><br><br>
-        <%elsif pet.adoptable == false %>
-          <%= "**#{pet.name} Has Already Been Approved on Another Application**" %>
-          <%= button_to "Reject Adoption for #{pet.name}", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, status: "Rejected"} %><br><br>
-        <%end%>
+          <%if pet.adoptable == true %>
+            <%= button_to "Approve Adoption for #{pet.name}", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, status: "Approved"} %><br><br>
+            <%= button_to "Reject Adoption for #{pet.name}", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, status: "Rejected"} %><br><br>
+          <%elsif pet.adoptable == false %>
+            <%= "**#{pet.name} Has Already Been Approved on Another Application**" %>
+            <%= button_to "Reject Adoption for #{pet.name}", "/admin/applications/#{@application.id}", method: :patch, params:{pet_id: pet.id, status: "Rejected"} %><br><br>
+          <%end%>
         <% elsif @application.application_pets[index].status == "Approved" %>
-        <%= "Application Approved" %><br><br>
+          <%= "Application Approved" %><br><br>
         <% elsif @application.application_pets[index].status == "Rejected" %>
-        <%= "Application Rejected" %><br><br>
+          <%= "Application Rejected" %><br><br>
       <%end%>
     </div>
   <%end%>

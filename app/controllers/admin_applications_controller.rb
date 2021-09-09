@@ -10,7 +10,7 @@ class AdminApplicationsController < ApplicationController
 
     @application.update_status!
 
-    redirect_to "/admin/applications/#{params[:application_id]}"
+    redirect_to "/admin/applications/#{@application.id}"
   end
 
 private

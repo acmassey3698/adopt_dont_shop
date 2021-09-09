@@ -28,8 +28,6 @@ class ApplicationsController < ApplicationController
 
 private
   def application_params
-    params
-    .permit(:name, :street, :city, :state, :zip, :status)
-    .with_defaults(message: "")
+    params.permit(:name, :street, :city, :state, :zip, :status, :message)
   end
 end
